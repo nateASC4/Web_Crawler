@@ -5,7 +5,8 @@
 		pkgs.gdb
 		pkgs.gnumake
 	  pkgs.curl.dev
-    pkgs.libcurl.dev
-    pkgs.libxml.dev
   ];
+    env = {
+    C_INCLUDE_PATH = "${pkgs.libxml2.dev}/include/libxml2";
+  };
 }

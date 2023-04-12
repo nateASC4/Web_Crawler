@@ -1,5 +1,6 @@
-compile = "make -s"
+compile = ["make", "-s"]
 run = "./main"
+entrypoint = "main.c"
 hidden = ["main", "main-debug", "**/*.o", "**/*.d", ".ccls-cache", "Makefile"]
 
 [nix]
@@ -65,7 +66,3 @@ pattern = "**/*.{c,h}"
 
 [languages.c.languageServer]
 start = "ccls"
-
-[deployment]
-run = ["sh", "-c", "./main"]
-build = ["sh", "-c", "make -s"]

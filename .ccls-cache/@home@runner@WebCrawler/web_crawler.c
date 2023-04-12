@@ -2,17 +2,11 @@
 #include <stdio.h> // scanning through files 
 #include <string.h> // scanning through files 
 #include <curl/curl.h> // to send HTTP requests not available in Replit 
-
-//#include <http.h>
 #include <libxml/HTMLparser.h> // for parsing HTML and XML 
-
-
 #include <pthread.h> ///for POSIX multithreading 
 #include <stdlib.h> // scanning through files 
 
-
 #define NUM_THREADS 6
-
 #define MAX_LINKS 10
 //max URL length
 #define MAX_URL_LENGTH 2083 
@@ -88,6 +82,29 @@ int writeToFile(){
 
 //First Step to make a basic web crawler 
 int currentIndex = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 size_t writeCallback(char * buffer, size_t size, size_t nmemb, void * userp) {
   TidyBuffer * tidyBuffer = (TidyBuffer *) userp;
