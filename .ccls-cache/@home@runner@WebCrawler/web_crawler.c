@@ -1,42 +1,92 @@
-/*
-This a group project in which you are required to form a group of 3 and submit the project on the 
-day of final submission by presenting a live demo of your own WebCrawler along with properly 
-formatted code files. On the day of submission, you are also required to submit the GitHub link for 
-your entire project. 
-A web crawler is a program that automatically navigates the web pages and extracts useful 
-information from them. The goal of this project is to develop a multithreaded web crawler that 
-can efficiently crawl and extract information from multiple web pages simultaneously.
-1. Develop a multithreaded web crawler in C.
-2. The crawler should be able to crawl multiple web pages concurrently.
-3. The crawler should extract and store relevant information such as any links present on 
-the page.
-4. The crawler should be able to follow links on the page to other pages and continue the 
-crawling process.
-5. The crawler should be able to handle errors and exceptions, such as invalid URLs or 
-unavailable pages.
-6. The extracted information should be stored in an appropriate data structure, such as a 
-database or a file.
-7. The input must be in the form of a text file containing multiple links/URLs which will be 
-parsed as input to the program.
-*/
 
+#include <stdio.h> // scanning through files 
+#include <string.h> // scanning through files 
+#include <curl/curl.h> // to send HTTP requests not available in Replit 
 
-//crawl websites on each thread???
+//#include <http.h>
+#include <libxml/HTMLparser.h> // for parsing HTML and XML 
+
 
 #include <pthread.h> ///for POSIX multithreading 
-#include <cstidlib>
-#include <stdio.h>
-#include <string.h>
-#include <curl/curl.h>
-#include <tidy/tidy.h>
-#include <tidy/buffio.h>
+#include <stdlib.h> // scanning through files 
+
+
 #define NUM_THREADS 6
-#include "crawler.h"
-#include "io.c"
 
 #define MAX_LINKS 10
-#define MAX_URL_LEN 512
+//max URL length
+#define MAX_URL_LENGTH 2083 
+#define buffer [MAX_URL_LENGTH]
 
+
+//In this program we will follow SOLID principles to ensure clarity and improve functionality of our code
+
+//scan a file for URL
+      // Check if filename is provided as an argument
+int step1_scanFile(){
+  int scan = 0; 
+    if (scan != 2) {
+        printf("Usage: ./scan_urls <filename>\n");
+        return 1;
+    }
+
+    // Open file
+    FILE* fp = fopen("url.txt", "r");
+    if (fp == NULL) {
+        printf("Error: could not open file %s\n", "url.txt");
+        return 1;
+    }
+  //we need to iterate through the list in a loop
+
+    char url[MAX_URL_LENGTH];
+    while (fgets(url, MAX_URL_LENGTH, fp) != NULL) {
+        // Remove trailing newline character if present
+        if (url[strlen(url) - 1] == '\n') {
+            url[strlen(url) - 1] = '\0';
+        }
+      
+        // Check if url starts with http:// or https://
+        if (strncmp(url, "http://", 7) == 0 || strncmp(url, "https://", 8) == 0) { 
+          //use strncmp to avoid buffer overflows
+            printf("Found URL: %s\n", url);
+        }
+        //if url does not exist 
+      else {
+        printf("%s","404:URL not FOUND");
+      }
+    }
+    // Close file
+    fclose(fp);
+
+    return 0;
+}
+//initialize the libcurl library 
+void step0_initlibcurl(){
+  CURL* curler;
+  CURLcode res;
+
+  curler  = curl_easy_init();
+  res = curl_easy_perform(curler); 
+
+      // Check if the curl request was successful
+  if (res != CURLE_OK) {
+      printf("Error performing curl request: %s\n", curl_easy_strerror(res));
+      return 1;
+
+  
+}
+//this method will send request to website 
+void step2_send_request(){
+  
+}
+
+int writeToFile(){
+  //this will be the last function as we will write to the file after we get 
+}
+  //do you want to check for sanitzation of the URL 
+//loop throug the URLs 
+
+//First Step to make a basic web crawler 
 int currentIndex = 0;
 
 size_t writeCallback(char * buffer, size_t size, size_t nmemb, void * userp) {

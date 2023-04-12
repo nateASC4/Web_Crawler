@@ -4,5 +4,8 @@
 		pkgs.ccls
 		pkgs.gdb
 		pkgs.gnumake
-	];
+	  pkgs.curl.dev
+    pkgs.libcurl.dev
+    pkgs.libxml.dev
+  ];
 }
