@@ -1,0 +1,5 @@
+Author: Look for metadata such as author tags or bylines to identify the author of the webpage or article.
+Links: Crawl the webpage for links to other pages on the same website or to external websites.
+Metadata: Look for metadata such as title, description, and keywords to help categorize and describe the webpage's content.
+Cookies: Look for cookies used by the website, which may contain information about user preferences or behavior.
+Forms: Look for HTML forms used by the website, which may contain input fields for user data such as names, addresses, or search terms.
