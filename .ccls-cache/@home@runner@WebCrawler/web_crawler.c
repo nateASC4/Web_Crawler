@@ -21,6 +21,7 @@ struct Crawled_Data{
   char cookies[100];
 };
 
+
 //create 10 threads (1 thread per website) for each website
 void create_threads(){
   //here we will create each thread using the POSIX library 
@@ -103,6 +104,20 @@ int step1_scanFile(){
     return 0;
 }
 
+//initialize the libcurl library 
+void step0_initlibcurl(){
+  CURL* curler;
+  CURLcode res;
+
+  curler  = curl_easy_init();
+  res = curl_easy_perform(curler); 
+
+      // Check if the curl request was successful
+  if (res != CURLE_OK) {
+      printf("Error performing curl request: %s\n", curl_easy_strerror(res));
+      
+  }
+
 //establish a connection to each website
 void step3_create_connection(){
   
@@ -112,9 +127,6 @@ void step2_send_request(){
   //now that we read the file, we know which website to crawl first
   step1_scanFile();
   //so as we crawl we add the information to an array
-  
-  
-
   
 
   
@@ -136,14 +148,12 @@ void writeToFile(){
     for (int i =0; i < sizeof(arr); i++){
       
     }
-  
-
-}
-  //do you want to check for sanitzation of the URL 
+    //do you want to check for sanitzation of the URL 
 //loop throug the URLs 
 
 //First Step to make a basic web crawler 
 int currentIndex = 0;
 
+}
 
 
